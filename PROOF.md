@@ -10,8 +10,8 @@ Honest, weekly numbers for growthOS. Updated by hand until the dogfood workflow 
 
 | Metric | Value | Source |
 | --- | ---: | --- |
-| GitHub stars | 0 | not yet public |
-| npm installs (7d) | 0 | not yet published |
+| GitHub stars | 0 | [public since 2026-11-05](https://github.com/tenwz/growthos), no distribution yet |
+| npm installs (7d) | 0 | package not published yet |
 | Demo runs | 0 | `growthos demo` is local only |
 | Design-partner calls | 0 | none booked |
 | Qualified replies | 0 | no launch yet |
@@ -60,6 +60,7 @@ No experiment has a result yet. When one does, the receipt goes in the experimen
 - Wrote the first memo: 6 claims, 17 receipts, 2 channels.
 - Defined two launch experiments with baselines and guardrails.
 - Built and verified the evidence engine, CLI, MCP server, cockpit, and score.
+- Published the source at [github.com/tenwz/growthos](https://github.com/tenwz/growthos) and the landing page at [reed.wiki/growthos](https://reed.wiki/growthos/).
 
 ## What we are not saying
 
