@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#07080a"/>
+  <g stroke="#161b22" stroke-width="1">
+    <line x1="80" y1="0" x2="80" y2="630"/><line x1="184" y1="0" x2="184" y2="630"/><line x1="288" y1="0" x2="288" y2="630"/><line x1="392" y1="0" x2="392" y2="630"/><line x1="496" y1="0" x2="496" y2="630"/><line x1="600" y1="0" x2="600" y2="630"/><line x1="704" y1="0" x2="704" y2="630"/><line x1="808" y1="0" x2="808" y2="630"/><line x1="912" y1="0" x2="912" y2="630"/><line x1="1016" y1="0" x2="1016" y2="630"/><line x1="1120" y1="0" x2="1120" y2="630"/>
+    <line x1="0" y1="90" x2="1200" y2="90"/><line x1="0" y1="202" x2="1200" y2="202"/><line x1="0" y1="314" x2="1200" y2="314"/><line x1="0" y1="426" x2="1200" y2="426"/><line x1="0" y1="538" x2="1200" y2="538"/>
+  </g>
+  <g transform="translate(80 76)">
+    <rect x="0" y="12" width="5" height="12" rx="2" fill="#c6ff3d"/>
+    <rect x="9" y="6" width="5" height="18" rx="2" fill="#c6ff3d"/>
+    <rect x="18" y="0" width="5" height="24" rx="2" fill="#c6ff3d"/>
+    <text x="36" y="20" fill="#e6edf3" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="22" font-weight="700">growthOS</text>
+  </g>
+  <text x="80" y="196" fill="#8b949e" font-family="ui-monospace, monospace" font-size="14" letter-spacing="3">GROWTH OS SCORE</text>
+  <text x="80" y="340" fill="#e6edf3" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="150" font-weight="700">82</text>
+  <text x="330" y="300" fill="#c6ff3d" font-family="ui-monospace, monospace" font-size="22">/ 100</text>
+  <rect x="330" y="320" width="124" height="34" rx="17" fill="#16210a" stroke="#3d5c12"/>
+  <text x="350" y="343" fill="#c6ff3d" font-family="ui-monospace, monospace" font-size="15">SYSTEM</text>
+  <text x="80" y="420" fill="#c9d1d9" font-family="ui-sans-serif, system-ui" font-size="28">growthOS</text>
+  <text x="80" y="456" fill="#8b949e" font-family="ui-sans-serif, system-ui" font-size="18">Evidence-first growth memory for AI agents.</text>
+  <g transform="translate(620 250)">
+      <text x="0" y="0" fill="#8b949e" font-family="ui-monospace, monospace" font-size="12" letter-spacing="2">SIGNALS</text>
+      <text x="0" y="58" fill="#e6edf3" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="48" font-weight="700">20</text>
+    </g><g transform="translate(800 250)">
+      <text x="0" y="0" fill="#8b949e" font-family="ui-monospace, monospace" font-size="12" letter-spacing="2">RECEIPTS</text>
+      <text x="0" y="58" fill="#e6edf3" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="48" font-weight="700">17</text>
+    </g><g transform="translate(980 250)">
+      <text x="0" y="0" fill="#8b949e" font-family="ui-monospace, monospace" font-size="12" letter-spacing="2">EXPERIMENTS</text>
+      <text x="0" y="58" fill="#e6edf3" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="48" font-weight="700">2</text>
+    </g>
+  <text x="80" y="572" fill="#6e7681" font-family="ui-monospace, monospace" font-size="14">https://github.com/tenwz/growthos</text>
+  <text x="1120" y="572" text-anchor="end" fill="#6e7681" font-family="ui-monospace, monospace" font-size="14">receipts or it didn't happen</text>
+</svg>

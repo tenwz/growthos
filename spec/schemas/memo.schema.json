@@ -1,0 +1,79 @@
+{
+  "$ref": "#/definitions/memo",
+  "definitions": {
+    "memo": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "growthos/memo@1",
+          "default": "growthos/memo@1"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^memo_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "period": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "published",
+            "rejected"
+          ],
+          "default": "draft"
+        },
+        "generated_by": {
+          "type": "string"
+        },
+        "run_id": {
+          "type": "string"
+        },
+        "claim_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "receipt_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_diversity": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "created_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "published_at": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/memo/properties/created_at"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "supersedes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "period",
+        "created_at"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "growthOS memo",
+  "$id": "https://growthos.dev/schemas/memo.schema.json"
+}

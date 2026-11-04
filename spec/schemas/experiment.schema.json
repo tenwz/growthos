@@ -1,0 +1,131 @@
+{
+  "$ref": "#/definitions/experiment",
+  "definitions": {
+    "experiment": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "growthos/experiment@1",
+          "default": "growthos/experiment@1"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^exp_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "proposed",
+            "running",
+            "complete",
+            "abandoned"
+          ],
+          "default": "proposed"
+        },
+        "hypothesis": {
+          "type": "string",
+          "minLength": 10
+        },
+        "signal_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^sig_[0-9A-HJKMNP-TV-Z]{26}$"
+          },
+          "default": []
+        },
+        "channel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "audience": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string",
+          "default": "human"
+        },
+        "start_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "end_at": {
+          "$ref": "#/definitions/experiment/properties/start_at"
+        },
+        "primary_metric": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1
+            },
+            "baseline": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "target": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "observed": {
+              "type": [
+                "number",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "name"
+          ],
+          "additionalProperties": false
+        },
+        "guardrails": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "decision": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "scale",
+                "iterate",
+                "kill",
+                "inconclusive"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "learning": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "hypothesis",
+        "channel",
+        "primary_metric"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "growthOS experiment",
+  "$id": "https://growthos.dev/schemas/experiment.schema.json"
+}

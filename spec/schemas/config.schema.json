@@ -1,0 +1,136 @@
+{
+  "$ref": "#/definitions/config",
+  "definitions": {
+    "config": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "growthos/config@1",
+          "default": "growthos/config@1"
+        },
+        "spec": {
+          "type": "string",
+          "default": "0.1"
+        },
+        "repo": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "default": "Growth OS"
+            },
+            "timezone": {
+              "type": "string",
+              "default": "UTC"
+            }
+          },
+          "additionalProperties": false
+        },
+        "providers": {
+          "type": "object",
+          "properties": {
+            "default": {
+              "type": "string",
+              "default": "command"
+            },
+            "command": {
+              "type": "object",
+              "properties": {
+                "cmd": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "default": [
+                    "claude",
+                    "-p"
+                  ]
+                },
+                "timeout_seconds": {
+                  "type": "integer",
+                  "exclusiveMinimum": 0,
+                  "default": 900
+                }
+              },
+              "additionalProperties": false
+            },
+            "openai_compatible": {
+              "type": "object",
+              "properties": {
+                "base_url": {
+                  "type": "string",
+                  "format": "uri",
+                  "default": "https://api.openai.com/v1"
+                },
+                "model": {
+                  "type": "string",
+                  "default": "gpt-4.1-mini"
+                },
+                "api_key_env": {
+                  "type": "string",
+                  "default": "OPENAI_API_KEY"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false,
+          "default": {
+            "default": "command"
+          }
+        },
+        "score": {
+          "type": "object",
+          "properties": {
+            "min_signals": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 20
+            },
+            "require_public_for_certified": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          "additionalProperties": false,
+          "default": {
+            "min_signals": 20,
+            "require_public_for_certified": true
+          }
+        },
+        "cockpit": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "default": "Growth OS"
+            },
+            "theme": {
+              "type": "string",
+              "enum": [
+                "dark",
+                "light"
+              ],
+              "default": "dark"
+            }
+          },
+          "additionalProperties": false,
+          "default": {
+            "title": "Growth OS",
+            "theme": "dark"
+          }
+        }
+      },
+      "required": [
+        "repo"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "growthOS config",
+  "$id": "https://growthos.dev/schemas/config.schema.json"
+}

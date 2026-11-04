@@ -1,0 +1,19 @@
+schema: growthos/config@1
+spec: "0.1"
+repo:
+  name: Summit Air
+  timezone: America/Denver
+
+providers:
+  default: command
+  command:
+    cmd: ["claude", "-p"]
+    timeout_seconds: 900
+
+score:
+  min_signals: 20
+  require_public_for_certified: true
+
+cockpit:
+  title: Summit Air
+  theme: dark

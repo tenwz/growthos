@@ -1,0 +1,100 @@
+{
+  "$ref": "#/definitions/eval",
+  "definitions": {
+    "eval": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "growthos/eval@1",
+          "default": "growthos/eval@1"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^eval_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rubric": {
+          "type": "string",
+          "minLength": 1
+        },
+        "deterministic_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "judge_penalty": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 15,
+          "default": 0
+        },
+        "final_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "points": {
+                "type": "number"
+              },
+              "earned": {
+                "type": "number"
+              },
+              "detail": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "points",
+              "earned",
+              "detail"
+            ],
+            "additionalProperties": false
+          },
+          "default": []
+        },
+        "judge": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "created_at": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "id",
+        "target",
+        "rubric",
+        "deterministic_score",
+        "final_score",
+        "created_at"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "growthOS eval",
+  "$id": "https://growthos.dev/schemas/eval.schema.json"
+}

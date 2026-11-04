@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Questions and ideas
+    url: https://github.com/tenwz/growthos/discussions
+    about: Ask how to use growthOS, share a workflow, or propose a format change.
+  - name: Security report
+    url: https://github.com/tenwz/growthos/security/policy
+    about: Report an audit bypass or a vulnerability privately. Do not open a public issue.
+  - name: Read the spec first
+    url: https://github.com/tenwz/growthos/blob/main/spec/growth-repo-spec-v0.1.md
+    about: Most format questions are answered normatively in the spec.

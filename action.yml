@@ -1,0 +1,38 @@
+name: growthOS
+description: Fail the build when marketing claims have no receipts
+author: growthOS
+branding:
+  icon: check-circle
+  color: green
+
+inputs:
+  path:
+    description: Path to the Growth OS repo
+    required: false
+    default: .
+  strict:
+    description: Treat warnings (stale memo, single-channel evidence, duplicates) as errors
+    required: false
+    default: "true"
+  min-score:
+    description: Fail if the Growth OS Score is below this value
+    required: false
+    default: ""
+  version:
+    description: growthos version to run
+    required: false
+    default: latest
+
+runs:
+  using: composite
+  steps:
+    - name: Audit claims
+      shell: bash
+      run: |
+        args=(doctor "${{ inputs.path }}")
+        if [ "${{ inputs.strict }}" = "true" ]; then args+=(--strict); fi
+        npx --yes "growthos@${{ inputs.version }}" "${args[@]}"
+    - name: Check score
+      if: inputs.min-score != ''
+      shell: bash
+      run: npx --yes "growthos@${{ inputs.version }}" score "${{ inputs.path }}" --min "${{ inputs.min-score }}"

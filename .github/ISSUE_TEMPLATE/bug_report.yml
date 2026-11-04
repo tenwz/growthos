@@ -1,0 +1,55 @@
+name: Bug report
+description: Something failed, or the audit accepted something it should reject.
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time. If this is a security issue, do not open an issue — see [SECURITY.md](https://github.com/tenwz/growthos/blob/main/SECURITY.md).
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: The command, the output, and what you expected instead.
+      placeholder: |
+        $ npx growthos doctor .
+        ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: A repo, a gist, or the smallest set of files that reproduces it. Do not paste private customer quotes.
+      placeholder: |
+        1. npx growthos init /tmp/repro
+        2. ...
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: growthOS version
+      description: Output of `npx growthos --version`
+    validations:
+      required: true
+
+  - type: input
+    id: node
+    attributes:
+      label: Node and OS
+      placeholder: "Node 20.18.0, macOS 14.5"
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else
+      description: Logs, screenshots, or a proposed fix. Redact names and private quotes.
+    validations:
+      required: false

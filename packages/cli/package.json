@@ -1,0 +1,54 @@
+{
+  "name": "growthos",
+  "version": "0.1.0",
+  "description": "The evidence-first Growth OS for AI agents. Memory, receipts, and a scoreboard for marketing.",
+  "type": "module",
+  "bin": {
+    "growthos": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": ["dist", "assets", "README.md", "LICENSE"],
+  "keywords": [
+    "growth",
+    "marketing",
+    "ai-agents",
+    "mcp",
+    "claude-code",
+    "codex",
+    "customer-truth",
+    "growth-os"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsup",
+    "prepack": "pnpm build && tsx ../../scripts/copy-assets.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "commander": "^12.1.0",
+    "gray-matter": "^4.0.3",
+    "picocolors": "^1.1.1",
+    "ulid": "^2.3.0",
+    "yaml": "^2.6.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@growthos/core": "workspace:*",
+    "@growthos/mcp": "workspace:*",
+    "tsup": "^8.3.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tenwz/growthos.git"
+  },
+  "homepage": "https://github.com/tenwz/growthos#readme",
+  "bugs": {
+    "url": "https://github.com/tenwz/growthos/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

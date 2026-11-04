@@ -1,0 +1,156 @@
+{
+  "$ref": "#/definitions/job",
+  "definitions": {
+    "job": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "growthos/job@1",
+          "default": "growthos/job@1"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^job_[a-z0-9-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "default": 1
+        },
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "data_sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "signal_glob",
+                  "metric_glob",
+                  "file_glob"
+                ]
+              },
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "filters": {
+                "type": "object",
+                "additionalProperties": {}
+              }
+            },
+            "required": [
+              "kind",
+              "path"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "schedule": {
+          "type": "string",
+          "minLength": 1
+        },
+        "filters": {
+          "type": "object",
+          "additionalProperties": {},
+          "default": {}
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "schema": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "path",
+              "schema"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "quality_bar": {
+          "type": "object",
+          "properties": {
+            "min_receipts_per_claim": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "default": 1
+            },
+            "require_verbatim_quote": {
+              "type": "boolean",
+              "default": true
+            },
+            "require_source_url": {
+              "type": "boolean",
+              "default": true
+            },
+            "min_source_diversity": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "default": 2
+            },
+            "max_claims": {
+              "type": "integer",
+              "exclusiveMinimum": 0,
+              "default": 7
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "human_approval": {
+          "type": "boolean"
+        },
+        "success_metric": {
+          "type": "string",
+          "minLength": 1
+        },
+        "write_back": {
+          "type": "object",
+          "properties": {
+            "learnings": {
+              "type": "string"
+            },
+            "rejected": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "data_sources",
+        "schedule",
+        "outputs",
+        "human_approval",
+        "success_metric"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "growthOS job spec",
+  "$id": "https://growthos.dev/schemas/job.schema.json"
+}

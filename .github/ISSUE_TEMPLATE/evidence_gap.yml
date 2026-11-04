@@ -1,0 +1,48 @@
+name: Evidence gap or audit bypass
+description: A claim passed that should have failed, or a rule that rejects a legitimate case.
+title: "evidence: "
+labels: ["evidence"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The audit is the load-bearing part of this project. A real bypass is more valuable than a feature request.
+
+        If the bypass could be used to certify fabricated marketing claims at scale, report it privately per [SECURITY.md](https://github.com/tenwz/growthos/blob/main/SECURITY.md).
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type
+      options:
+        - Audit accepted something it should reject (bypass)
+        - Audit rejected something legitimate (false positive)
+        - A rule is missing
+        - The score can be gamed
+    validations:
+      required: true
+
+  - type: textarea
+    id: case
+    attributes:
+      label: The smallest case
+      description: Quote, signal frontmatter, memo line, and the command. Synthetic or public data only.
+      render: markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should happen
+      description: Which rule should fire, and what the error should say.
+    validations:
+      required: true
+
+  - type: textarea
+    id: fix
+    attributes:
+      label: Proposed fix (optional)
+      description: A rule, a test, or a code pointer.
+    validations:
+      required: false

@@ -1,0 +1,35 @@
+{
+  "spec": "growthos/growth-repo@0.1",
+  "schemas": [
+    {
+      "name": "config",
+      "url": "https://growthos.dev/schemas/config.schema.json",
+      "file": "spec/schemas/config.schema.json"
+    },
+    {
+      "name": "signal",
+      "url": "https://growthos.dev/schemas/signal.schema.json",
+      "file": "spec/schemas/signal.schema.json"
+    },
+    {
+      "name": "memo",
+      "url": "https://growthos.dev/schemas/memo.schema.json",
+      "file": "spec/schemas/memo.schema.json"
+    },
+    {
+      "name": "experiment",
+      "url": "https://growthos.dev/schemas/experiment.schema.json",
+      "file": "spec/schemas/experiment.schema.json"
+    },
+    {
+      "name": "job",
+      "url": "https://growthos.dev/schemas/job.schema.json",
+      "file": "spec/schemas/job.schema.json"
+    },
+    {
+      "name": "eval",
+      "url": "https://growthos.dev/schemas/eval.schema.json",
+      "file": "spec/schemas/eval.schema.json"
+    }
+  ]
+}

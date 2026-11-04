@@ -1,0 +1,39 @@
+{
+  "name": "growthos-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Evidence-first Growth OS for AI agents",
+  "license": "MIT",
+  "packageManager": "pnpm@10.18.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm --filter growthos build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "schemas": "tsx scripts/build-schemas.ts",
+    "schemas:check": "tsx scripts/build-schemas.ts --check",
+    "validate:fixtures": "tsx scripts/validate-fixtures.ts",
+    "demo": "tsx packages/cli/src/index.ts demo --no-open",
+    "doctor:example": "tsx packages/cli/src/index.ts doctor examples/hvac-saas --strict",
+    "score:example": "tsx packages/cli/src/index.ts score examples/hvac-saas --explain",
+    "pack:smoke": "tsx scripts/smoke-npm-pack.ts",
+    "growthos": "tsx packages/cli/src/index.ts",
+    "cards": "tsx scripts/generate-launch-cards.ts",
+    "cards:check": "tsx scripts/generate-launch-cards.ts --check-launch"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/node": "^22.10.0",
+    "tsup": "^8.3.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.9",
+    "zod-to-json-schema": "^3.25.2"
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "$ref": "#/definitions/signal",
+  "definitions": {
+    "signal": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "growthos/signal@1",
+          "default": "growthos/signal@1"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^sig_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "retracted",
+            "superseded"
+          ],
+          "default": "active"
+        },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "public",
+            "internal",
+            "synthetic"
+          ],
+          "default": "public"
+        },
+        "captured_at": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "x_post",
+                "reddit_comment",
+                "hn_comment",
+                "github_issue",
+                "interview",
+                "support_ticket",
+                "review",
+                "survey",
+                "call",
+                "metric",
+                "note",
+                "other"
+              ]
+            },
+            "url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "author": {
+              "type": "string"
+            },
+            "published_at": {
+              "$ref": "#/definitions/signal/properties/captured_at"
+            },
+            "retrieved_at": {
+              "$ref": "#/definitions/signal/properties/captured_at"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 3
+        },
+        "summary": {
+          "type": "string"
+        },
+        "segment": {
+          "type": "string"
+        },
+        "sentiment": {
+          "type": "string",
+          "enum": [
+            "positive",
+            "negative",
+            "neutral",
+            "mixed"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "consent": {
+          "type": "string",
+          "enum": [
+            "public",
+            "internal",
+            "anonymized"
+          ],
+          "default": "public"
+        },
+        "evidence": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "const": "event_count"
+                },
+                "count": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "of": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "query": {
+                  "type": "string"
+                },
+                "window": {
+                  "type": "string"
+                },
+                "source_url": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              },
+              "required": [
+                "kind",
+                "count"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "type": "string",
+                  "const": "metric"
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "value": {
+                  "type": "number"
+                },
+                "unit": {
+                  "type": "string"
+                },
+                "window": {
+                  "type": "string"
+                },
+                "source_url": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              },
+              "required": [
+                "kind",
+                "name",
+                "value"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "integrity": {
+          "type": "object",
+          "properties": {
+            "quote_hash": {
+              "type": "string",
+              "pattern": "^sha256:[a-f0-9]{64}$"
+            },
+            "canonical_url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "quote_hash"
+          ],
+          "additionalProperties": false
+        },
+        "supersedes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "captured_at",
+        "source",
+        "quote"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "growthOS signal",
+  "$id": "https://growthos.dev/schemas/signal.schema.json"
+}

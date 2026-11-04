@@ -1,0 +1,23 @@
+schema: growthos/config@1
+spec: "0.1"
+repo:
+  name: My Growth OS
+  timezone: UTC
+
+providers:
+  default: command
+  command:
+    cmd: ["claude", "-p"]
+    timeout_seconds: 900
+  # openai_compatible:
+  #   base_url: https://api.openai.com/v1
+  #   model: gpt-4.1-mini
+  #   api_key_env: OPENAI_API_KEY
+
+score:
+  min_signals: 20
+  require_public_for_certified: true
+
+cockpit:
+  title: My Growth OS
+  theme: dark

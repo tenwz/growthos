@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="28" role="img" aria-label="growthOS: 88/100">
+  <title>growthOS: 88/100</title>
+  <rect width="140" height="28" rx="6" fill="#0b0d10"/>
+  <rect x="0" y="0" width="78" height="28" rx="6" fill="#171a1f"/>
+  <rect x="78" y="0" width="62" height="28" rx="6" fill="#0b0d10"/>
+  <g transform="translate(10 7)">
+    <rect x="0" y="9" width="3" height="5" rx="1" fill="#c6ff3d"/>
+    <rect x="5" y="5" width="3" height="9" rx="1" fill="#c6ff3d"/>
+    <rect x="10" y="1" width="3" height="13" rx="1" fill="#c6ff3d"/>
+  </g>
+  <text x="70" y="18" fill="#e6edf3" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" text-anchor="end">growthOS</text>
+  <text x="109" y="18" fill="#7ee787" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" font-weight="700" text-anchor="middle">88/100</text>
+</svg>

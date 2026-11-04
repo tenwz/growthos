@@ -1,0 +1,16 @@
+{
+  "week": "2026-W45",
+  "signals": 31,
+  "pipeline": {
+    "conversations": 14,
+    "qualified": 7,
+    "meetings": 3,
+    "pipeline_usd": 42000
+  },
+  "experiments": {
+    "running": 1,
+    "complete": 2
+  },
+  "source": "synthetic demo",
+  "provenance": "synthetic"
+}

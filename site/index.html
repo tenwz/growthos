@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>growthOS — Marketing agents need receipts</title>
+<meta name="description" content="An evidence-first Growth OS for AI agents. Customer signals, memos with receipts, experiments that end in decisions, and a deterministic score. Open source, file-based, model-agnostic.">
+<meta property="og:title" content="growthOS — Marketing agents need receipts">
+<meta property="og:description" content="Every claim cites a signal. Every experiment ends in a decision. Every repo gets a score.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tenwz.github.io/growthos/">
+<meta property="og:image" content="https://tenwz.github.io/growthos/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="growthOS — marketing agents need receipts">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://tenwz.github.io/growthos/og.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230b0f0d'/><path d='M28 68V32h10v26h20v10H28zm38 0V32h10v36H66z' fill='%233ddc84'/></svg>">
+<style>
+  :root {
+    --bg: #0b0f0d;
+    --panel: #111714;
+    --panel-2: #151d19;
+    --line: #263029;
+    --text: #e8f0ea;
+    --muted: #94a39a;
+    --lime: #3ddc84;
+    --lime-dim: #1f7a48;
+    --red: #ff7b72;
+    --amber: #f2cc60;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", "Roboto Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    --max: 1120px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(900px 500px at 70% -10%, rgba(61,220,132,.13), transparent 65%),
+      radial-gradient(700px 400px at 10% 10%, rgba(61,220,132,.05), transparent 60%),
+      var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  header {
+    position: sticky; top: 0; z-index: 20;
+    backdrop-filter: blur(14px);
+    background: rgba(11,15,13,.72);
+    border-bottom: 1px solid rgba(38,48,41,.7);
+  }
+  nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 750; letter-spacing: -.02em; font-size: 18px; text-decoration: none; }
+  .logo svg { width: 26px; height: 26px; }
+  .navlinks { display: flex; align-items: center; gap: 22px; font-size: 14px; color: var(--muted); }
+  .navlinks a { text-decoration: none; }
+  .navlinks a:hover { color: var(--text); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 16px; border-radius: 10px; text-decoration: none;
+    font-size: 14px; font-weight: 650; border: 1px solid var(--line);
+    background: var(--panel); color: var(--text); cursor: pointer;
+    transition: transform .12s ease, border-color .12s ease, background .12s ease;
+  }
+  .btn:hover { transform: translateY(-1px); border-color: #3a4a40; }
+  .btn.primary { background: var(--lime); color: #07130c; border-color: var(--lime); }
+  .btn.primary:hover { background: #4ee896; }
+  .hero { padding: 92px 0 52px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 12px; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--lime);
+    border: 1px solid rgba(61,220,132,.28); background: rgba(61,220,132,.07);
+    padding: 6px 10px; border-radius: 999px; margin-bottom: 26px;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 12px var(--lime); }
+  h1 {
+    font-size: clamp(40px, 6.2vw, 72px);
+    line-height: 1.02; letter-spacing: -.045em; margin: 0 0 22px; max-width: 900px;
+  }
+  h1 .accent { color: var(--lime); }
+  .sub { font-size: clamp(17px, 2vw, 20px); color: var(--muted); max-width: 720px; margin: 0 0 32px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .stars { font-size: 13px; color: var(--muted); font-family: var(--mono); }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center; margin-top: 10px; }
+  .terminal {
+    background: linear-gradient(180deg, #101713, #0c1210);
+    border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,.45);
+    font-family: var(--mono); font-size: 13px; line-height: 1.75;
+  }
+  .term-bar { display: flex; align-items: center; gap: 8px; padding: 12px 14px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.02); }
+  .term-bar i { width: 10px; height: 10px; border-radius: 50%; background: #2c3831; display: block; }
+  .term-bar span { margin-left: 8px; color: var(--muted); font-size: 12px; }
+  .term-body { padding: 18px 18px 20px; white-space: pre-wrap; }
+  .prompt { color: var(--muted); }
+  .pass { color: var(--lime); font-weight: 700; }
+  .fail { color: var(--red); font-weight: 700; }
+  .dim { color: var(--muted); }
+  .score { color: var(--lime); font-weight: 700; }
+  .caption { margin-top: 12px; color: var(--muted); font-size: 12px; font-family: var(--mono); text-align: right; }
+  section { padding: 72px 0; border-top: 1px solid rgba(38,48,41,.55); }
+  .kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--lime); margin: 0 0 14px; }
+  h2 { font-size: clamp(28px, 3.6vw, 42px); line-height: 1.12; letter-spacing: -.03em; margin: 0 0 16px; max-width: 760px; }
+  .lede { color: var(--muted); font-size: 17px; max-width: 700px; margin: 0 0 36px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card {
+    background: linear-gradient(180deg, var(--panel), rgba(17,23,20,.6));
+    border: 1px solid var(--line); border-radius: 14px; padding: 22px;
+  }
+  .card h3 { margin: 0 0 8px; font-size: 17px; letter-spacing: -.01em; }
+  .card p { margin: 0; color: var(--muted); font-size: 14px; }
+  .card .num { font-family: var(--mono); font-size: 12px; color: var(--lime); display: block; margin-bottom: 12px; }
+  .card.real { border-color: rgba(61,220,132,.3); }
+  .badge-real, .badge-spec {
+    display: inline-block; font-family: var(--mono); font-size: 10px; letter-spacing: .06em;
+    text-transform: uppercase; padding: 3px 7px; border-radius: 5px; margin-bottom: 14px;
+  }
+  .badge-real { background: rgba(61,220,132,.12); color: var(--lime); border: 1px solid rgba(61,220,132,.25); }
+  .badge-spec { background: rgba(148,163,154,.1); color: var(--muted); border: 1px solid var(--line); }
+  .loop {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; align-items: center;
+    margin: 34px 0 0; font-family: var(--mono); font-size: 12px;
+  }
+  .loop span {
+    text-align: center; padding: 12px 6px; border: 1px solid var(--line);
+    border-radius: 9px; background: var(--panel); color: var(--text);
+  }
+  .loop i { color: var(--lime); text-align: center; font-style: normal; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .code {
+    background: #0c1210; border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px; overflow-x: auto; font-family: var(--mono); font-size: 13px; line-height: 1.8;
+    white-space: pre; color: #cfe0d5; position: relative;
+  }
+  .code .c { color: #6d7f74; }
+  .code .g { color: var(--lime); }
+  .copy {
+    position: absolute; top: 10px; right: 10px; font-family: var(--mono); font-size: 11px;
+    background: #16201a; color: var(--muted); border: 1px solid var(--line);
+    border-radius: 6px; padding: 4px 8px; cursor: pointer;
+  }
+  .copy:hover { color: var(--text); }
+  .scoretable { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .scoretable th, .scoretable td { text-align: left; padding: 12px 10px; border-bottom: 1px solid var(--line); }
+  .scoretable th { font-family: var(--mono); font-size: 11px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .scoretable td:first-child { font-weight: 650; }
+  .scoretable td:last-child { text-align: right; font-family: var(--mono); color: var(--lime); }
+  .meter { height: 6px; border-radius: 99px; background: #1c2621; overflow: hidden; margin-top: 7px; }
+  .meter i { display: block; height: 100%; background: linear-gradient(90deg, var(--lime-dim), var(--lime)); border-radius: 99px; }
+  .quote {
+    border-left: 3px solid var(--lime); padding: 6px 0 6px 20px; margin: 30px 0 0;
+    color: var(--muted); font-size: 16px; max-width: 720px;
+  }
+  .quote strong { color: var(--text); }
+  .pillrow { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .pill { font-family: var(--mono); font-size: 12px; color: var(--muted); border: 1px solid var(--line); padding: 5px 10px; border-radius: 999px; background: var(--panel); }
+  footer { padding: 46px 0 60px; color: var(--muted); font-size: 13px; }
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 18px; align-items: center; }
+  .foot a { color: var(--muted); text-decoration: none; margin-left: 18px; }
+  .foot a:hover { color: var(--text); }
+  .zh { display: none; }
+  body.lang-zh .en { display: none; }
+  body.lang-zh .zh { display: block; }
+  .langbtn { font-family: var(--mono); font-size: 12px; padding: 6px 9px; }
+  @media (max-width: 900px) {
+    .hero-grid, .two { grid-template-columns: 1fr; gap: 34px; }
+    .grid3 { grid-template-columns: 1fr; }
+    .loop { grid-template-columns: 1fr; }
+    .loop i { transform: rotate(90deg); }
+    .navlinks .hide-sm { display: none; }
+    .hero { padding-top: 62px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#top">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#111714"/><path d="M28 68V32h10v26h20v10H28zm38 0V32h10v36H66z" fill="#3ddc84"/></svg>
+        growthOS
+      </a>
+      <div class="navlinks">
+        <a class="hide-sm" href="#systems" data-zh="系统">Systems</a>
+        <a class="hide-sm" href="#score" data-zh="评分">Score</a>
+        <a class="hide-sm" href="https://github.com/tenwz/growthos/tree/main/docs" data-zh="文档">Docs</a>
+        <a class="hide-sm" href="https://github.com/tenwz/growthos/blob/main/spec/growth-repo-spec-v0.1.md" data-zh="规范">Spec</a>
+        <button class="btn langbtn" id="lang" type="button">中文</button>
+        <a class="btn" href="https://github.com/tenwz/growthos">GitHub ↗</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" style="border-top:0">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span>
+            <span class="en">Evidence-first Growth OS</span>
+            <span class="zh">证据优先的增长系统</span>
+          </div>
+          <h1 class="en">Marketing agents<br>need <span class="accent">receipts.</span></h1>
+          <h1 class="zh">营销 Agent<br>需要<span class="accent">收据。</span></h1>
+          <p class="sub en">growthOS is a folder your coding agent can read: real customer signals, memos that cite them, experiments that end in decisions, and a deterministic score. No SaaS. No scrapers. Just Markdown and a CLI.</p>
+          <p class="sub zh">growthOS 是一个你的 Coding Agent 能读懂的文件夹：真实的客户信号、每条都能追溯的 memo、以决策收尾的实验，以及确定性评分。没有 SaaS，没有爬虫，只有 Markdown 和一个 CLI。</p>
+          <div class="cta">
+            <a class="btn primary" href="https://github.com/tenwz/growthos" data-zh="在 GitHub 上 Star">Star on GitHub</a>
+            <a class="btn" href="https://github.com/tenwz/growthos#quickstart" data-zh="阅读快速开始">Read the quickstart</a>
+            <span class="stars">MIT · Node 20+ · 0 telemetry</span>
+          </div>
+          <div class="pillrow">
+            <span class="pill">Claude Code</span>
+            <span class="pill">Codex</span>
+            <span class="pill">Cursor</span>
+            <span class="pill">MCP</span>
+            <span class="pill">Ollama</span>
+          </div>
+        </div>
+        <div>
+          <div class="terminal">
+            <div class="term-bar"><i></i><i></i><i></i><span>growthos demo</span></div>
+            <div class="term-body"><span class="prompt">$</span> npx growthos demo
+
+Auditing 2 memos...
+  <span class="fail">FAIL</span>  growth/memos/2026-11-03-draft-missed-call-ai.md
+        Claim 2: "HVAC owners want an AI SDR."
+        <span class="dim">Claim 2 has no receipt. Add [@sig_...] or remove the claim.</span>
+
+  <span class="pass">PASS</span>  growth/memos/2026-11-05-whatthemarketistellingus.md
+        <span class="dim">6 claims, 18 receipts, 4 channels.</span>
+
+Growth OS Score: <span class="score">88/100</span> (System)
+Cockpit: growthos-demo/growth/cockpit/index.html</div>
+          </div>
+          <div class="caption" data-zh="离线 · 确定性 · 约 3 秒">Offline · deterministic · ~3 seconds</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="wrap">
+      <p class="kicker en">The problem</p>
+      <p class="kicker zh">问题</p>
+      <h2 class="en">An agent can write a hundred claims in a minute.<br>It cannot tell you which ones are true.</h2>
+      <h2 class="zh">Agent 一分钟能写 100 条营销结论。<br>它无法告诉你哪一条是真的。</h2>
+      <p class="lede en">Teams end up with an untraceable doc of “insights,” a content calendar that repeats what the founder already believed, experiments that end in a vibe, and an AI that confidently invents a quote.</p>
+      <p class="lede zh">于是团队得到一份无法追溯的「洞察」文档、一个不断重复创始人原有想法的内容日历、以「感觉还行」收尾的实验，以及一个会自信编造客户原话的 AI。</p>
+      <div class="loop">
+        <span data-zh="信号">signal</span><i>→</i><span data-zh="结论">claim</span><i>→</i><span data-zh="收据">receipt</span><i>→</i><span data-zh="决策">decision</span>
+      </div>
+      <p class="quote en">The bottleneck is not generation. It is <strong>memory and evidence</strong>. growthOS makes both enforceable.</p>
+      <p class="quote zh">真正的瓶颈不是生成，是<strong>记忆与证据</strong>。growthOS 让这两件事可以被强制执行。</p>
+    </div>
+  </section>
+
+  <section id="systems">
+    <div class="wrap">
+      <p class="kicker en">Six systems</p>
+      <p class="kicker zh">六个系统</p>
+      <h2 class="en">Three are real software. Three are complete job specs.</h2>
+      <h2 class="zh">三个是真实软件，三个是完整 job spec。</h2>
+      <p class="lede en">v0.1 is deliberately narrow. It ships the evidence loop, not a suite of dashboards.</p>
+      <p class="lede zh">v0.1 刻意收窄：先交付证据闭环，而不是一堆仪表盘。</p>
+      <div class="grid3">
+        <div class="card real">
+          <span class="badge-real">software</span>
+          <h3 data-zh="客户真相">Customer Truth</h3>
+          <p data-zh="记录客户原话，编译每周 memo，拒绝每一条没有收据的结论。">Capture verbatim signals. Compile a weekly memo. Reject every claim without a receipt.</p>
+        </div>
+        <div class="card real">
+          <span class="badge-real">software</span>
+          <h3 data-zh="创意测试">Creative Testing</h3>
+          <p data-zh="假设 → 带收据的结果 → 放大 / 迭代 / 停止 → 写下学到的东西。">Hypothesis → result with a receipt → scale / iterate / kill → written learning.</p>
+        </div>
+        <div class="card real">
+          <span class="badge-real">software</span>
+          <h3 data-zh="增长驾驶舱">Growth Cockpit</h3>
+          <p data-zh="一个静态 HTML 文件：证据覆盖率、失败结论、实验台账和评分。">One static HTML file. Evidence coverage, failing claims, experiment ledger, score.</p>
+        </div>
+        <div class="card">
+          <span class="badge-spec">job spec</span>
+          <h3 data-zh="创始人内容">Founder Content</h3>
+          <p data-zh="一个真实信号 → 一篇具体的帖子。不写清单文，不编造脆弱感。">One real signal → one specific post. No listicles, no invented vulnerability.</p>
+        </div>
+        <div class="card">
+          <span class="badge-spec">job spec</span>
+          <h3 data-zh="外联信号">Outbound Signal</h3>
+          <p data-zh="公开信号 → 角度 → 草稿。由人批准并发送。不自动私信。">Public signal → angle → draft. A human approves and sends. No auto-DM.</p>
+        </div>
+        <div class="card">
+          <span class="badge-spec">job spec</span>
+          <h3 data-zh="AI 搜索可见性">AI Search Visibility</h3>
+          <p data-zh="找出助手引用别人的问题，然后去建它们会引用的来源。">Find the questions where assistants cite others, then build the source they quote.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="score">
+    <div class="wrap two">
+      <div>
+        <p class="kicker en">The scoreboard</p>
+        <p class="kicker zh">记分牌</p>
+        <h2 class="en">100 points. Deterministic. Auditable.</h2>
+        <h2 class="zh">100 分，确定性，可审计。</h2>
+        <p class="lede en">No LLM judge in the total. Every point maps to a behavior you can inspect. Synthetic demos are labeled and can never be certified.</p>
+        <p class="lede zh">总分不含 LLM 打分。每一分都对应一个可检查的行为。合成 demo 会被标记，永远不能认证。</p>
+        <div class="code" style="margin-top:26px">
+<span class="c"># every check, every point</span>
+npx growthos score --explain
+
+<span class="c"># use it as a CI gate</span>
+npx growthos doctor --strict
+npx growthos score --min 60
+        </div>
+      </div>
+      <div>
+        <table class="scoretable">
+          <thead><tr><th data-zh="维度">Dimension</th><th data-zh="分值">Points</th></tr></thead>
+          <tbody>
+            <tr><td><span data-zh="证据完整性">Evidence integrity</span><div class="meter"><i style="width:100%"></i></div></td><td>30</td></tr>
+            <tr><td><span data-zh="新鲜度与覆盖">Freshness and coverage</span><div class="meter"><i style="width:50%"></i></div></td><td>15</td></tr>
+            <tr><td><span data-zh="闭环程度">Loop closure</span><div class="meter"><i style="width:67%"></i></div></td><td>20</td></tr>
+            <tr><td><span data-zh="Agent 运行">Agent operations</span><div class="meter"><i style="width:50%"></i></div></td><td>15</td></tr>
+            <tr><td><span data-zh="Memo 质量">Memo quality</span><div class="meter"><i style="width:33%"></i></div></td><td>10</td></tr>
+            <tr><td><span data-zh="证明与驾驶舱">Proof and cockpit</span><div class="meter"><i style="width:33%"></i></div></td><td>10</td></tr>
+          </tbody>
+        </table>
+        <p class="caption" style="text-align:left;margin-top:14px">Growth OS 90+ · System 80+ · Operator 60+ · Seedling 40+</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="start">
+    <div class="wrap two">
+      <div>
+        <p class="kicker en">Quickstart</p>
+        <p class="kicker zh">快速开始</p>
+        <h2 class="en">See it fail correctly in three seconds.</h2>
+        <h2 class="zh">三秒内看它正确地失败。</h2>
+        <p class="lede en">The demo is the whole thesis: a confident memo fails the build because one claim has no receipt. Then a defensible memo passes and the cockpit scores the system.</p>
+        <p class="lede zh">Demo 就是整个论点：一份自信的 memo 因为一条结论没有收据而无法通过构建；然后一份站得住脚的 memo 通过，cockpit 给整个系统打分。</p>
+        <div class="cta">
+          <a class="btn primary" href="https://github.com/tenwz/growthos#quickstart" data-zh="从快速开始入手">Start with the quickstart</a>
+          <a class="btn" href="https://github.com/tenwz/growthos/blob/main/docs/quickstart.md" data-zh="完整指南">Full guide</a>
+        </div>
+      </div>
+      <div class="code"><button class="copy" data-copy="npx growthos demo">copy</button><span class="c"># 1. the demo</span>
+npx growthos demo
+
+<span class="c"># 2. your repo</span>
+npx growthos init my-growth-os --agent all
+cd my-growth-os
+
+<span class="c"># 3. a real signal</span>
+npx growthos capture \
+  --source x_post \
+  --url "https://x.com/acme/status/123" \
+  --quote "We tried an AI SDR for a month..."
+
+<span class="c"># 4. audit the claim</span>
+npx growthos doctor --strict
+
+<span class="c"># 5. score + cockpit</span>
+npx growthos score --explain
+npx growthos cockpit --no-open</div>
+    </div>
+  </section>
+
+  <section id="open">
+    <div class="wrap">
+      <p class="kicker en">Open by construction</p>
+      <p class="kicker zh">天然开放</p>
+      <h2 class="en">Your data stays in your repo. Your model stays your choice.</h2>
+      <h2 class="zh">数据留在你的仓库，模型由你选择。</h2>
+      <div class="grid3">
+        <div class="card"><h3 data-zh="纯文件">Plain files</h3><p data-zh="Markdown + YAML。每条结论都能在 PR 里 diff。没有数据库、没有导出、没有锁定。">Markdown + YAML. Diff every claim in a pull request. No database, no export, no lock-in.</p></div>
+        <div class="card"><h3 data-zh="模型无关">Model-agnostic</h3><p data-zh="默认用命令调用 claude、codex 或 Ollama，也支持 OpenAI 兼容接口。手动粘贴永远可用。">A default command provider for claude, codex, or Ollama; an OpenAI-compatible adapter. Manual paste always works.</p></div>
+        <div class="card"><h3 data-zh="Agent 原生">Agent-native</h3><p data-zh="六个 Agent Skills、本地 stdio MCP server，以及把客户文本当作不可信数据的 prompt 编译器。">Six Agent Skills, a local stdio MCP server, and a prompt compiler that treats customer text as untrusted data.</p></div>
+      </div>
+      <p class="quote en"><strong>Complements the skills you already use.</strong> Keep marketingskills for copy craft. growthOS is the memory, the receipts, and the decision log underneath.</p>
+      <p class="quote zh"><strong>和你已有的 Skills 一起用。</strong> marketingskills 负责文案和定位；growthOS 是它下面的记忆、收据和决策日志。</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <strong>growthOS</strong> · MIT · <span data-zh="作者">Built by</span> <a href="https://github.com/tenwz" style="margin-left:0">@tenwz</a>
+    </div>
+    <div>
+      <a href="https://github.com/tenwz/growthos">GitHub</a>
+      <a href="https://www.npmjs.com/package/growthos">npm</a>
+      <a href="https://github.com/tenwz/growthos/blob/main/README.zh-CN.md">中文 README</a>
+      <a href="https://github.com/tenwz/growthos/blob/main/PROOF.md">Proof</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const lang = document.getElementById('lang');
+  function applyLang(zh) {
+    document.body.classList.toggle('lang-zh', zh);
+    lang.textContent = zh ? 'EN' : '中文';
+    document.documentElement.lang = zh ? 'zh-CN' : 'en';
+    for (const el of document.querySelectorAll('[data-zh]')) {
+      if (!el.dataset.en) el.dataset.en = el.textContent;
+      el.textContent = zh ? el.dataset.zh : el.dataset.en;
+    }
+  }
+  lang.addEventListener('click', () => applyLang(!document.body.classList.contains('lang-zh')));
+  for (const button of document.querySelectorAll('.copy')) {
+    button.addEventListener('click', async () => {
+      const text = button.getAttribute('data-copy') || '';
+      try {
+        await navigator.clipboard.writeText(text);
+        button.textContent = 'copied';
+        setTimeout(() => { button.textContent = 'copy'; }, 1400);
+      } catch {
+        button.textContent = 'select';
+      }
+    });
+  }
+</script>
+</body>
+</html>
